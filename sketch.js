@@ -27,7 +27,7 @@ function setup() {
     timeleft = min * 60;
   }
 
-  var timer = select('#timer');
+  var timer = select("#timer");
   timer.html(convertSeconds(timeleft - currentTime));
 
   var interval = setInterval(timeIt, 1000);
