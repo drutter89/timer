@@ -10,21 +10,20 @@ function convertSeconds(s) {
   return nf(hour, 2) + ':' + nf(min, 2) + ':' + nf(sec, 2);
 }
 
-var song;
+var audio = new Audio('alarm.mp3');
+// // function preload() {
+// //   song = loadSound('alarm.mp3');
+// // }
 
-// function preload() {
-//   song = loadSound('alarm.mp3');
+// function alarm() {
+//   song = loadSound("alarm.mp3");
+//   createCanvas(720, 200);
+//   background(255, 0, 0);
 // }
 
-function alarm() {
-  song = loadSound("alarm.mp3");
-  createCanvas(720, 200);
-  background(255, 0, 0);
-}
-
-// function preload() {
-//   ding = loadSound("alarm.mp3");
-// }
+// // function preload() {
+// //   ding = loadSound("alarm.mp3");
+// // }
 
 function setup() {
   noCanvas();
@@ -53,8 +52,7 @@ function setup() {
     console.log(`Current time var: ${currentTime}
     timeleft var: ${timeleft}`)
     if (currentTime == timeleft) {
-      alarm();
-      song.play();
+      audio.play();
       clearInterval(interval);
       // counter = 0;
     }
