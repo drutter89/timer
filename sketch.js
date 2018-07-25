@@ -1,4 +1,4 @@
-var timeleft = 300;
+var timeleft = 10;
 
 var startTime = 0;
 var currentTime = 0;
@@ -6,10 +6,21 @@ var currentTime = 0;
 function convertSeconds(s) {
   var min = floor(s / 60);
   var sec = s % 60;
-  return nf(min, 2) + ':' + nf(sec, 2);
+  var hour = floor(min / 60);
+  return nf(hour, 2) + ':' + nf(min, 2) + ':' + nf(sec, 2);
 }
 
-// var ding;
+var song;
+
+// function preload() {
+//   song = loadSound('alarm.mp3');
+// }
+
+function alarm() {
+  song = loadSound("alarm.mp3");
+  createCanvas(720, 200);
+  background(255, 0, 0);
+}
 
 // function preload() {
 //   ding = loadSound("alarm.mp3");
@@ -20,11 +31,15 @@ function setup() {
   startTime = millis();
 
 
+
   var params = getURLParams();
   console.log(params);
   if (params.minute) {
     var min = params.minute;
     timeleft = min * 60;
+  } else if (params.hour) {
+    var hour = params.hour;
+    timeleft = hour * 60;
   }
 
   var timer = select("#timer");
@@ -35,10 +50,13 @@ function setup() {
   function timeIt() {
     currentTime = floor((millis() - startTime) / 1000);
     timer.html(convertSeconds(timeleft - currentTime));
+    console.log(`Current time var: ${currentTime}
+    timeleft var: ${timeleft}`)
     if (currentTime == timeleft) {
-      // ding.play();
+      alarm();
+      song.play();
       clearInterval(interval);
-      //counter = 0;
+      // counter = 0;
     }
   }
 
